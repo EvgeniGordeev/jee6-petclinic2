@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPetTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPetLabel_id}"/>
+                    <h:outputText value="#{petController.selected.id}" title="#{bundle.ViewPetTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewPetLabel_name}"/>
+                    <h:outputText value="#{petController.selected.name}" title="#{bundle.ViewPetTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewPetLabel_birthDate}"/>
+                    <h:outputText value="#{petController.selected.birthDate}" title="#{bundle.ViewPetTitle_birthDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewPetLabel_ownerId}"/>
+                    <h:outputText value="#{petController.selected.ownerId}" title="#{bundle.ViewPetTitle_ownerId}"/>
+                    <h:outputText value="#{bundle.ViewPetLabel_typeId}"/>
+                    <h:outputText value="#{petController.selected.typeId}" title="#{bundle.ViewPetTitle_typeId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{petController.destroyAndView}" value="#{bundle.ViewPetDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPetEditLink}"/>
+                <br />
+                <h:commandLink action="#{petController.prepareCreate}" value="#{bundle.ViewPetCreateLink}" />
+                <br />
+                <h:commandLink action="#{petController.prepareList}" value="#{bundle.ViewPetShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPetIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
