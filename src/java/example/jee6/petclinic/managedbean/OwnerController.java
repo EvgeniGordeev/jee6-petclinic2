@@ -1,12 +1,9 @@
 package example.jee6.petclinic.managedbean;
 
-import example.jee6.petclinic.Owner;
-import example.jee6.petclinic.managedbean.util.JsfUtil;
-import example.jee6.petclinic.managedbean.util.PaginationHelper;
-import example.jee6.petclinic.session.OwnerFacade;
-
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,6 +14,11 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+
+import example.jee6.petclinic.Owner;
+import example.jee6.petclinic.managedbean.util.JsfUtil;
+import example.jee6.petclinic.managedbean.util.PaginationHelper;
+import example.jee6.petclinic.session.OwnerFacade;
 
 @ManagedBean(name = "ownerController")
 @SessionScoped
@@ -149,7 +151,7 @@ public class OwnerController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{ selectedItemIndex, selectedItemIndex + 1 }).get(0);
         }
     }
 
@@ -184,8 +186,8 @@ public class OwnerController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
-    public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+    public List<Owner> getAll() {
+        return ejbFacade.findAll();
     }
 
     @FacesConverter(forClass = Owner.class)
@@ -220,7 +222,7 @@ public class OwnerController implements Serializable {
             }
             if (object instanceof Owner) {
                 Owner o = (Owner) object;
-                return getStringKey(o.getId());
+                return o.getFirstName() + " " + o.getLastName();
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Owner.class.getName());
             }

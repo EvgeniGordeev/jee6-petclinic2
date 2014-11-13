@@ -15,8 +15,6 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewVisitLabel_id}"/>
-                    <h:outputText value="#{visitController.selected.id}" title="#{bundle.ViewVisitTitle_id}"/>
                     <h:outputText value="#{bundle.ViewVisitLabel_visitDate}"/>
                     <h:outputText value="#{visitController.selected.visitDate}" title="#{bundle.ViewVisitTitle_visitDate}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />

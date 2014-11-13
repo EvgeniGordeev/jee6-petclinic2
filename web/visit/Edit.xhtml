@@ -15,8 +15,6 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditVisitLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{visitController.selected.id}" title="#{bundle.EditVisitTitle_id}" required="true" requiredMessage="#{bundle.EditVisitRequiredMessage_id}"/>
                     <h:outputLabel value="#{bundle.EditVisitLabel_visitDate}" for="visitDate" />
                     <h:inputText id="visitDate" value="#{visitController.selected.visitDate}" title="#{bundle.EditVisitTitle_visitDate}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />

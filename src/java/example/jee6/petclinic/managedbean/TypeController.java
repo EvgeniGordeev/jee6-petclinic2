@@ -6,6 +6,7 @@ import example.jee6.petclinic.managedbean.util.PaginationHelper;
 import example.jee6.petclinic.session.TypeFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -184,8 +185,8 @@ public class TypeController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
-    public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+    public List<Type> getAll() {
+        return ejbFacade.findAll();
     }
 
     @FacesConverter(forClass = Type.class)
@@ -220,7 +221,7 @@ public class TypeController implements Serializable {
             }
             if (object instanceof Type) {
                 Type o = (Type) object;
-                return getStringKey(o.getId());
+                return o.getName();
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Type.class.getName());
             }

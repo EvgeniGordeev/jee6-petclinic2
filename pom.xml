@@ -11,6 +11,7 @@
   <properties>
     <jsf.version>2.2.6</jsf.version>
     <mysql.version>5.1.31</mysql.version>
+    <wf.plugin.version>1.0.2.Final</wf.plugin.version>
   </properties>
 
   <dependencies>
@@ -55,9 +56,27 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>${mysql.version}</version>
     </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>1.1.0.Final</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <build>
     <sourceDirectory>src/java</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src/conf</directory>
+        <targetPath>META-INF</targetPath>
+      </resource>
+      <resource>
+        <directory>src/java</directory>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+      </resource>
+    </resources>
     <defaultGoal>install</defaultGoal>
     <finalName>jee6-petclinic2</finalName>
     <plugins>
@@ -83,8 +102,79 @@
       <plugin>
         <groupId>org.wildfly.plugins</groupId>
         <artifactId>wildfly-maven-plugin</artifactId>
-        <version>1.0.2.Final</version>
+        <version>${wf.plugin.version}</version>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>deploy-driver</id>
+      <build>
+        <plugins>
+          <plugin>
+            <!-- Deploy the JDBC library -->
+            <groupId>org.wildfly.plugins</groupId>
+            <artifactId>wildfly-maven-plugin</artifactId>
+            <version>${wf.plugin.version}</version>
+            <configuration>
+              <groupId>mysql</groupId>
+              <artifactId>mysql-connector-java</artifactId>
+              <name>mysql-connector-java-${mysql.version}.jar</name>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>ds</id>
+      <build>
+        <plugins>
+          <plugin>
+            <!-- Deploy the petclinic data source -->
+            <groupId>org.wildfly.plugins</groupId>
+            <artifactId>wildfly-maven-plugin</artifactId>
+            <version>${wf.plugin.version}</version>
+            <executions>
+              <execution>
+                <id>deploy-driver</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>deploy-artifact</goal>
+                </goals>
+                <configuration>
+                  <groupId>mysql</groupId>
+                  <artifactId>mysql-connector-java</artifactId>
+                  <name>mysql-connector-java-${mysql.version}.jar</name>
+                </configuration>
+              </execution>
+              <execution>
+                <id>deploy-datasource</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>add-resource</goal>
+                </goals>
+                <configuration>
+                  <address>subsystem=datasources,data-source=java:/jee6-petclinic2</address>
+                  <resources>
+                    <resource>
+                      <properties>
+                        <connection-url>jdbc:mysql://localhost/petclinic</connection-url>
+                        <jndi-name>java:/jee6-petclinic2</jndi-name>
+                        <enabled>true</enabled>
+                        <use-ccm>false</use-ccm>
+                        <driver-class>com.mysql.jdbc.Driver</driver-class>
+                        <driver-name>mysql-connector-java-${mysql.version}.jar_com.mysql.jdbc.Driver_5_1</driver-name>
+                        <user-name>root</user-name>
+                        <password>root</password>
+                      </properties>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

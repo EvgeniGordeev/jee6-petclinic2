@@ -7,6 +7,7 @@ package example.jee6.petclinic;
 
 import java.io.Serializable;
 import java.util.Collection;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,20 +24,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author EvgeniGordeev
  */
 @Entity
-@Table(name = "owners", catalog = "petclinic", schema = "")
+@Table(name = "owners")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Owner.findAll", query = "SELECT o FROM Owner o"),
-    @NamedQuery(name = "Owner.findById", query = "SELECT o FROM Owner o WHERE o.id = :id"),
-    @NamedQuery(name = "Owner.findByFirstName", query = "SELECT o FROM Owner o WHERE o.firstName = :firstName"),
-    @NamedQuery(name = "Owner.findByLastName", query = "SELECT o FROM Owner o WHERE o.lastName = :lastName"),
-    @NamedQuery(name = "Owner.findByAddress", query = "SELECT o FROM Owner o WHERE o.address = :address"),
-    @NamedQuery(name = "Owner.findByCity", query = "SELECT o FROM Owner o WHERE o.city = :city"),
-    @NamedQuery(name = "Owner.findByTelephone", query = "SELECT o FROM Owner o WHERE o.telephone = :telephone")})
+        @NamedQuery(name = "Owner.findAll", query = "SELECT o FROM Owner o"),
+        @NamedQuery(name = "Owner.findById", query = "SELECT o FROM Owner o WHERE o.id = :id"),
+        @NamedQuery(name = "Owner.findByFirstName", query = "SELECT o FROM Owner o WHERE o.firstName = :firstName"),
+        @NamedQuery(name = "Owner.findByLastName", query = "SELECT o FROM Owner o WHERE o.lastName = :lastName"),
+        @NamedQuery(name = "Owner.findByAddress", query = "SELECT o FROM Owner o WHERE o.address = :address"),
+        @NamedQuery(name = "Owner.findByCity", query = "SELECT o FROM Owner o WHERE o.city = :city"),
+        @NamedQuery(name = "Owner.findByTelephone", query = "SELECT o FROM Owner o WHERE o.telephone = :telephone") })
 public class Owner implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -148,7 +148,7 @@ public class Owner implements Serializable {
 
     @Override
     public String toString() {
-        return "example.jee6.petclinic2.Owner[ id=" + id + " ]";
+        return getFirstName() + " " + getLastName();
     }
-    
+
 }

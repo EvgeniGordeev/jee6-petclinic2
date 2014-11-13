@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author EvgeniGordeev
  */
 @Entity
-@Table(name = "types", catalog = "petclinic", schema = "")
+@Table(name = "types")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Type.findAll", query = "SELECT t FROM Type t"),
@@ -100,7 +100,7 @@ public class Type implements Serializable {
 
     @Override
     public String toString() {
-        return "example.jee6.petclinic2.Type[ id=" + id + " ]";
+        return getName();
     }
     
 }

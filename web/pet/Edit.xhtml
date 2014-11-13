@@ -15,8 +15,6 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditPetLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{petController.selected.id}" title="#{bundle.EditPetTitle_id}" required="true" requiredMessage="#{bundle.EditPetRequiredMessage_id}"/>
                     <h:outputLabel value="#{bundle.EditPetLabel_name}" for="name" />
                     <h:inputText id="name" value="#{petController.selected.name}" title="#{bundle.EditPetTitle_name}" />
                     <h:outputLabel value="#{bundle.EditPetLabel_birthDate}" for="birthDate" />
@@ -24,12 +22,14 @@
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.EditPetLabel_ownerId}" for="ownerId" />
-                    <h:selectOneMenu id="ownerId" value="#{petController.selected.ownerId}" title="#{bundle.EditPetTitle_ownerId}" required="true" requiredMessage="#{bundle.EditPetRequiredMessage_ownerId}">
-                        <f:selectItems value="#{ownerController.itemsAvailableSelectOne}"/>
+                    <h:selectOneMenu id="ownerId" value="#{petController.selected.ownerId.id}" title="#{bundle.EditPetTitle_ownerId}" required="true" requiredMessage="#{bundle.EditPetRequiredMessage_ownerId}">
+                        <f:selectItem itemLabel="None" itemValue="#{null}"/>
+                        <f:selectItems value="#{ownerController.all}" var="owner" itemValue="#{owner.id}" itemLabel="#{owner.firstName} #{owner.lastName}" />
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditPetLabel_typeId}" for="typeId" />
-                    <h:selectOneMenu id="typeId" value="#{petController.selected.typeId}" title="#{bundle.EditPetTitle_typeId}" required="true" requiredMessage="#{bundle.EditPetRequiredMessage_typeId}">
-                        <f:selectItems value="#{typeController.itemsAvailableSelectOne}"/>
+                    <h:selectOneMenu id="typeId" value="#{petController.selected.typeId.id}" title="#{bundle.EditPetTitle_typeId}" required="true" requiredMessage="#{bundle.EditPetRequiredMessage_typeId}">
+                        <f:selectItem itemLabel="None" itemValue="#{null}" />
+                        <f:selectItems value="#{typeController.all}" var="type" itemValue="#{type.id}" itemLabel="#{type.name}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{petController.update}" value="#{bundle.EditPetSaveLink}"/>

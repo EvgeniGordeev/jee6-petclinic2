@@ -15,9 +15,7 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateOwnerLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{ownerController.selected.id}" title="#{bundle.CreateOwnerTitle_id}" required="true" requiredMessage="#{bundle.CreateOwnerRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.CreateOwnerLabel_firstName}" for="firstName" />
+                    <h:outputLabel value="#{bundle.CreateOwnerLabel_firstName}" for="firstName"/>
                     <h:inputText id="firstName" value="#{ownerController.selected.firstName}" title="#{bundle.CreateOwnerTitle_firstName}" />
                     <h:outputLabel value="#{bundle.CreateOwnerLabel_lastName}" for="lastName" />
                     <h:inputText id="lastName" value="#{ownerController.selected.lastName}" title="#{bundle.CreateOwnerTitle_lastName}" />

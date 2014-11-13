@@ -7,7 +7,7 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ViewOwnerTitle}"></h:outputText>
+            <h:outputText value="#{bundle.ViewOwnerTitle}"/>
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
@@ -15,8 +15,6 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewOwnerLabel_id}"/>
-                    <h:outputText value="#{ownerController.selected.id}" title="#{bundle.ViewOwnerTitle_id}"/>
                     <h:outputText value="#{bundle.ViewOwnerLabel_firstName}"/>
                     <h:outputText value="#{ownerController.selected.firstName}" title="#{bundle.ViewOwnerTitle_firstName}"/>
                     <h:outputText value="#{bundle.ViewOwnerLabel_lastName}"/>

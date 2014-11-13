@@ -15,8 +15,6 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreatePetLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{petController.selected.id}" title="#{bundle.CreatePetTitle_id}" required="true" requiredMessage="#{bundle.CreatePetRequiredMessage_id}"/>
                     <h:outputLabel value="#{bundle.CreatePetLabel_name}" for="name" />
                     <h:inputText id="name" value="#{petController.selected.name}" title="#{bundle.CreatePetTitle_name}" />
                     <h:outputLabel value="#{bundle.CreatePetLabel_birthDate}" for="birthDate" />
